@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد مدیریتی EPCC+F و FIDIC | دستیار صوتی و پایگاه دانش فارسی</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            950: '#030712',
+                            900: '#070f24',
+                            800: '#0d1b3e',
+                            700: '#152b63',
+                            accent: '#3b82f6',
+                            cyan: '#06b6d4',
+                            purple: '#8b5cf6',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e'
+                        }
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 26px rgba(59, 130, 246, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
+                        'neon-cyan': '0 0 26px rgba(6, 182, 212, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
+                        'neon-purple': '0 0 26px rgba(139, 92, 246, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
+                        'olympic': '0 24px 50px -12px rgba(0, 0, 0, 0.72), 0 0 32px rgba(6, 182, 212, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.22)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            background-image:
+                radial-gradient(circle at 12% 16%, rgba(59, 130, 246, 0.2) 0%, transparent 42%),
+                radial-gradient(circle at 88% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.14) 0%, transparent 50%),
+                linear-gradient(165deg, rgba(7, 15, 36, 0.94), rgba(3, 7, 18, 0.99)),
+                linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: linear-gradient(155deg, rgba(21, 43, 99, 0.56) 0%, rgba(10, 20, 48, 0.76) 55%, rgba(6, 12, 30, 0.88) 100%);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border: 1px solid rgba(125, 211, 252, 0.22);
+            border-top-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.68), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 58, 138, 0.44) 0%, rgba(15, 23, 42, 0.78) 65%, rgba(8, 14, 34, 0.9) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            border-top-color: rgba(255, 255, 255, 0.28);
+            box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(34, 211, 238, 0.65);
+            box-shadow: 0 22px 36px -10px rgba(0, 0, 0, 0.75), 0 0 26px rgba(6, 182, 212, 0.24);
+            transform: translateY(-3px);
+        }
+
+        .glass-pill {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(59, 130, 246, 0.15) 100%);
+            border: 1px solid rgba(186, 230, 253, 0.24);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.42) 0%, rgba(6, 182, 212, 0.18) 100%);
+            border-right: 3px solid #22d3ee;
+            color: #ffffff;
+            box-shadow: 0 10px 22px -6px rgba(6, 182, 212, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.24);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(8, 16, 38, 0.85);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.42);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(6, 182, 212, 0.75);
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.88); opacity: 0.8; }
+            50% { transform: scale(1.16); opacity: 0.25; }
+            100% { transform: scale(0.88); opacity: 0.8; }
+        }
+        .voice-ring {
+            animation: pulse-ring 2.2s infinite ease-in-out;
+        }
+
+        @keyframes equalizer {
+            0%, 100% { height: 6px; }
+            50% { height: 26px; }
+        }
+        .eq-bar {
+            animation: equalizer 0.8s infinite ease-in-out;
+        }
+        .eq-bar:nth-child(2) { animation-delay: 0.15s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(4) { animation-delay: 0.45s; }
+        .eq-bar:nth-child(5) { animation-delay: 0.2s; }
+
+        .ltr-num {
+            direction: ltr;
+            unicode-bidi: isolate;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col lg:flex-row selection:bg-cyan-500 selection:text-white">
+
+    <!-- Toast Notification Container (No alert()/confirm() used anywhere) -->
+    <div id="toast-container" class="fixed bottom-5 left-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+    <!-- Mobile Top Header -->
+    <header class="lg:hidden glass-panel border-b border-blue-500/20 p-4 flex items-center justify-between sticky top-0 z-40">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-neon-blue">
+                <i class="fa-solid fa-scale-balanced text-white text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-sm text-white">مرکز فرماندهی EPCC+F و فیدیک</h1>
+                <p class="text-[11px] text-cyan-400 font-mono">Olympic Legal & Voice Suite (FA)</p>
+            </div>
+        </div>
+        <button id="mobile-menu-btn" class="p-2.5 rounded-xl bg-blue-950/80 border border-blue-500/30 text-cyan-300 hover:bg-blue-900">
+            <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed inset-y-0 right-0 z-40 w-72 glass-panel border-l border-blue-500/20 transform translate-x-full lg:translate-x-0 lg:static transition-transform duration-300 flex flex-col justify-between shrink-0">
+        <div>
+            <!-- Brand Header -->
+            <div class="p-6 border-b border-blue-500/20 flex items-center justify-between">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 flex items-center justify-center shadow-neon-blue relative">
+                        <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                        <span class="absolute -bottom-1 -left-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-cyber-900 rounded-full"></span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono uppercase tracking-wider text-cyan-400 block">EPCC+F & FIDIC 2017</span>
+                        <h2 class="font-extrabold text-base text-white tracking-tight">داشبورد المپیک فارسی</h2>
+                    </div>
+                </div>
+                <button id="close-sidebar-btn" class="lg:hidden text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="p-4 space-y-1.5">
+                <button onclick="switchTab('overview')" id="nav-overview" class="nav-item active w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-chart-network w-5 text-center text-cyan-400"></i>
+                    <span>داشبورد جامع و شاخص‌ها</span>
+                </button>
+                <button onclick="switchTab('documents')" id="nav-documents" class="nav-item w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-cloud-arrow-up w-5 text-center text-blue-400"></i>
+                    <span>مخزن اسناد و آپلود مدارک</span>
+                    <span id="doc-badge" class="mr-auto text-[11px] bg-blue-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-mono">5</span>
+                </button>
+                <button onclick="switchTab('analyzer')" id="nav-analyzer" class="nav-item w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-magnifying-glass-chart w-5 text-center text-purple-400"></i>
+                    <span>تحلیل بندها، CBS و خسارات</span>
+                </button>
+                <button onclick="switchTab('letter')" id="nav-letter" class="nav-item w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-file-signature w-5 text-center text-emerald-400"></i>
+                    <span>تولیدکننده نامه و اخطار حقوقی</span>
+                </button>
+                <button onclick="switchTab('assistant')" id="nav-assistant" class="nav-item w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-robot w-5 text-center text-amber-400"></i>
+                    <span>دستیار صوتی و پرسش و پاسخ</span>
+                </button>
+                <button onclick="switchTab('matrix')" id="nav-matrix" class="nav-item w-full flex items-center gap-3.5 px-4 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-blue-900/30 transition-all">
+                    <i class="fa-solid fa-table-list w-5 text-center text-rose-400"></i>
+                    <span>ماتریس اعداد، CBS و DAAB</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Bottom Knowledge Base Status -->
+        <div class="p-4 border-t border-blue-500/20 space-y-3">
+            <div class="glass-card rounded-2xl p-3.5">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs text-slate-300 flex items-center gap-1.5 font-bold">
+                        <i class="fa-solid fa-database text-cyan-400"></i> پایگاه دانش یکپارچه
+                    </span>
+                    <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md">SYNCED</span>
+                </div>
+                <div class="w-full bg-slate-800/80 rounded-full h-1.5 mb-2 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-1.5 rounded-full" style="width: 100%"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-slate-400">
+                    <span>قرارداد EPCC+F و فیدیک ۲۰۱۷</span>
+                    <span class="font-mono text-cyan-300">100%</span>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between px-2 text-xs text-slate-400">
+                <span>وضعیت موتور صوتی فارسی:</span>
+                <span class="text-emerald-400 font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-microphone"></i> آماده (fa-IR)
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 flex flex-col min-w-0">
+        <!-- Top Command Header -->
+        <div class="glass-panel border-b border-blue-500/20 px-5 md:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <h2 id="page-title" class="text-base md:text-xl font-extrabold text-white">داشبورد جامع قرارداد EPCC+F یوتیلیتی پتروشیمی (۵ میلیارد یورو) و FIDIC Silver 2017</h2>
+                <p class="text-xs text-slate-400 mt-0.5">کارفرما: شرکت الفا / دلتا | پیمانکار: شرکت گاما | مشاور: شرکت زیگما | استناد کامل به اسناد قرارداد، فیدیک ۲۰۱۷، OECD و ICC</p>
+            </div>
+
+            <div class="flex items-center gap-2.5 flex-wrap">
+                <button onclick="switchTab('assistant'); toggleVoiceListening();" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold shadow-neon-purple border border-white/20 transition-all">
+                    <i class="fa-solid fa-microphone-lines animate-pulse"></i>
+                    <span>گفتگوی صوتی فارسی</span>
+                </button>
+                <button onclick="switchTab('letter')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl glass-pill hover:bg-cyan-500/20 text-cyan-200 text-xs font-bold transition-all">
+                    <i class="fa-solid fa-pen-nib"></i>
+                    <span>تنظیم اخطار حقوقی</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Views Container -->
+        <div class="p-4 md:p-6 space-y-6 flex-1">
+
+            <!-- ==================== TAB 1: OVERVIEW ==================== -->
+            <section id="tab-overview" class="tab-content space-y-6">
+                <!-- Top 4 KPI Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+                    <div class="glass-card rounded-2xl p-5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">مبلغ کل قرارداد و ساختار +F</p>
+                                <h3 class="text-xl md:text-2xl font-black text-white mt-1 font-mono ltr-num">€5.00B (85/15)</h3>
+                            </div>
+                            <div class="w-11 h-11 rounded-xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-cyan-400">
+                                <i class="fa-solid fa-landmark text-lg"></i>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-300 mt-3 leading-relaxed">
+                            <span class="text-cyan-400 font-bold">۴.۲۵B €</span> فاینانس ۸۵٪ + <span class="text-amber-400 font-bold">۷۵۰M €</span> نقد ۱۵٪ | پیش‌پرداخت ۵۰۰M € (۱۰٪)
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">مدت اجرا تا PAC و دوره تضمین</p>
+                                <h3 class="text-xl md:text-2xl font-black text-cyan-300 mt-1">۳۶ ماه PAC / ۱۲ ماه FAC</h3>
+                            </div>
+                            <div class="w-11 h-11 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
+                                <i class="fa-solid fa-hourglass-half text-lg"></i>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-300 mt-3 leading-relaxed">
+                            ۵ واحد یوتیلیتی: <span class="font-bold text-white">WWT، CCPP (650MW)، ASU، ETP (ZLD)، OSD</span>
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">خسارت تأخیر و سقف جرایم</p>
+                                <h3 class="text-xl md:text-2xl font-black text-amber-400 mt-1 font-mono ltr-num">0.05%/d | Max 10%</h3>
+                            </div>
+                            <div class="w-11 h-11 rounded-xl bg-amber-500/20 border border-amber-400/30 flex items-center justify-center text-amber-400">
+                                <i class="fa-solid fa-gauge-high text-lg"></i>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-300 mt-3 leading-relaxed">
+                            تأخیر روزانه <span class="text-amber-300 font-bold">۲.۵M €</span> تا سقف <span class="font-bold">۵۰۰M €</span> | کسور حسن انجام کار ۵٪
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">حل اختلاف، فورس ماژور و فیدیک</p>
+                                <h3 class="text-xl md:text-2xl font-black text-emerald-400 mt-1">DAB / ICC & FIDIC</h3>
+                            </div>
+                            <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-shield-check text-lg"></i>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-300 mt-3 leading-relaxed">
+                            اعلان فورس ماژور <span class="text-emerald-300 font-bold">۷ تا ۱۴ روز</span> | اخطار ادعای فیدیک <span class="font-bold">۲۸ روز</span> (Time-Bar)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Upload Box + Quick Q&A Box -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Quick Upload Box (5 cols) -->
+                    <div class="lg:col-span-5 glass-panel rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-base text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-folder-plus text-cyan-400"></i>
+                                    باکس آپلود مدارک و اسناد قرارداد
+                                </h3>
+                                <span class="text-[11px] text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2.5 py-0.5 rounded-full">TXT / MD / PDF / DOCX</span>
+                            </div>
+
+                            <label for="quick-file-upload" class="border-2 border-dashed border-blue-400/40 hover:border-cyan-400 bg-blue-950/30 hover:bg-blue-900/30 rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all group">
+                                <div class="w-14 h-14 rounded-full bg-blue-500/15 group-hover:bg-cyan-500/20 flex items-center justify-center mb-3 transition-all shadow-neon-blue">
+                                    <i class="fa-solid fa-cloud-arrow-up text-2xl text-cyan-400 group-hover:scale-110 transition-transform"></i>
+                                </div>
+                                <p class="text-sm font-bold text-white">مدارک قرارداد، الحاقیه‌ها یا صورت‌وضعیت‌ها را رها کنید</p>
+                                <p class="text-xs text-slate-400 mt-1">یا کلیک کنید تا فایل‌های متنی/اسنادی در پایگاه دانش ثبت شوند</p>
+                                <input id="quick-file-upload" type="file" multiple class="hidden" onchange="handleFileUpload(this.files)">
+                            </label>
+
+                            <div class="mt-4 space-y-2" id="overview-doc-list"></div>
+                        </div>
+
+                        <button onclick="switchTab('documents')" class="mt-4 w-full py-2.5 rounded-xl bg-blue-600/25 hover:bg-blue-600/40 border border-blue-500/30 text-xs font-bold text-cyan-300 transition-all">
+                            باز کردن مخزن کامل اسناد و افزودن متن <i class="fa-solid fa-arrow-left mr-1"></i>
+                        </button>
+                    </div>
+
+                    <!-- Quick Q&A Box (7 cols) -->
+                    <div class="lg:col-span-7 glass-panel rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-bold text-base text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-comments text-purple-400"></i>
+                                    باکس پرسش و پاسخ هوشمند (بر اساس قرارداد و فیدیک)
+                                </h3>
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                                    <span class="text-[11px] text-emerald-400 font-mono">RAG + FIDIC Ready</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <button onclick="askQuickQuestion('تفکیک بودجه CBS و ظرفیت پنج واحد یوتیلیتی قرارداد ۵ میلیارد یورویی چیست؟')" class="text-[11px] bg-blue-900/40 hover:bg-cyan-600/30 border border-blue-500/30 text-cyan-200 px-2.5 py-1 rounded-lg transition-all">
+                                    CBS و ظرفیت ۵ واحد یوتیلیتی
+                                </button>
+                                <button onclick="askQuickQuestion('شرایط فورس ماژور، مهلت اعلام و حق فسخ طولانی‌مدت در قرارداد و فیدیک چیست؟')" class="text-[11px] bg-blue-900/40 hover:bg-cyan-600/30 border border-blue-500/30 text-cyan-200 px-2.5 py-1 rounded-lg transition-all">
+                                    فورس ماژور و مهلت اعلام
+                                </button>
+                                <button onclick="askQuickQuestion('فرمول محاسبه خسارت عملکردی PLD و سقف کل خسارت‌ها چگونه است؟')" class="text-[11px] bg-blue-900/40 hover:bg-cyan-600/30 border border-blue-500/30 text-cyan-200 px-2.5 py-1 rounded-lg transition-all">
+                                    فرمول خسارت عملکردی (PLD)
+                                </button>
+                            </div>
+
+                            <div id="overview-chat-box" class="bg-cyber-950/85 border border-blue-500/20 rounded-xl p-4 h-52 overflow-y-auto space-y-3 text-xs leading-relaxed">
+                                <div class="flex items-start gap-2.5">
+                                    <div class="w-7 h-7 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-scale-balanced"></i>
+                                    </div>
+                                    <div class="bg-blue-950/55 border border-blue-500/20 rounded-xl p-3 text-slate-200">
+                                        درود! پایگاه دانش قرارداد بین‌المللی <strong class="text-cyan-400">EPCC+F</strong>، پیوست‌های فنی/حقوقی/مالی/مایلستون‌ها و چارچوب <strong class="text-purple-300">FIDIC Silver Book 2017</strong> آماده پاسخ‌گویی به زبان فارسی است. می‌توانید هر سؤال را تایپ کنید یا با دستیار صوتی بپرسید.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handleOverviewChat(event)" class="mt-3 flex gap-2">
+                            <input id="overview-chat-input" type="text" placeholder="سؤال خود را درباره CBS، فاینانس ۸۵٪، مهلت ۲۸ روزه فیدیک یا PLD بنویسید..." class="flex-1 bg-cyber-950/90 border border-blue-500/30 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none">
+                            <button type="button" onclick="switchTab('assistant'); toggleVoiceListening();" title="پرسش صوتی فارسی" class="px-3.5 py-2.5 rounded-xl bg-purple-600/30 border border-purple-400/40 text-purple-300 hover:bg-purple-600/50 transition-all">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                            <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-bold shadow-neon-blue transition-all">
+                                ارسال <i class="fa-solid fa-paper-plane mr-1"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Bottom Row: Alerts + 5 Units Overview -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 glass-panel rounded-2xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-base text-white flex items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                                هشدارهای حیاتی حقوقی و مهلت‌ها
+                            </h3>
+                            <span class="text-[11px] font-mono text-rose-400">CRITICAL</span>
+                        </div>
+                        <div class="space-y-2.5">
+                            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30">
+                                <p class="text-xs font-bold text-rose-200">مهلت ۲۸ روزه اخطار ادعا (FIDIC Clause 20.2.1)</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">عدم ارسال اخطار کتبی ظرف ۲۸ روز تقویمی ممکن است حق تمدید زمان یا جبران هزینه را ساقط کند.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-amber-950/30 border border-amber-500/30">
+                                <p class="text-xs font-bold text-amber-200">اعلان فورس ماژور و مهلت تمدید (۷ تا ۱۴ روز)</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">اعلام کتبی فوری رویداد قهری و ارائه گزارش مستند برای تعلیق خسارت تأخیر روزانه ۲.۵ میلیون یورو.</p>
+                            </div>
+                            <div class="p-3 rounded-xl bg-blue-950/40 border border-blue-500/30">
+                                <p class="text-xs font-bold text-cyan-200">تضامین بانکی APG و Performance Bond</p>
+                                <p class="text-[11px] text-slate-400 mt-0.5">هر کدام معادل ۱۰٪ مبلغ قرارداد (۵۰۰ میلیون یورو) با شرط ارائه ظرف ۲۱ روز و تمدید حداقل ۳۰ روز قبل از انقضا.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 glass-panel rounded-2xl p-5">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-base text-white flex items-center gap-2">
+                                <i class="fa-solid fa-industry text-cyan-400"></i>
+                                پنج واحد اصلی یوتیلیتی و سهم بودجه (CBS 1000–5000)
+                            </h3>
+                            <span class="text-[11px] font-mono text-cyan-400">€5,000,000,000</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div class="glass-card p-3.5 rounded-xl border-r-4 border-r-cyan-400">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>1000 – آب و آبگیر (WWT)</span>
+                                    <span class="font-mono text-cyan-300">€650M (13%)</span>
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-1">ورودی آب خام ۱۲٬۰۰۰ m³/h، آب دی‌مینراله DM ۴٬۵۰۰ m³/h و شبکه آتش‌نشانی ۲٬۴۰۰ m³/h.</p>
+                            </div>
+                            <div class="glass-card p-3.5 rounded-xl border-r-4 border-r-blue-400">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>2000 – نیروگاه و بخار (CCPP)</span>
+                                    <span class="font-mono text-blue-300">€1,850M (37%)</span>
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-1">تولید برق ۶۵۰ MW، بخار فرآیندی ۱٬۲۰۰ t/h (HP/MP/LP) و راندمان حرارتی حداقل ۵۲٪.</p>
+                            </div>
+                            <div class="glass-card p-3.5 rounded-xl border-r-4 border-r-purple-400">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>3000 – تفکیک هوا (ASU)</span>
+                                    <span class="font-mono text-purple-300">€950M (19%)</span>
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-1">اکسیژن ۴٬۸۰۰ TPD (≥۹۹.۶٪)، نیتروژن ۶٬۲۰۰ TPD (≤۵ ppm O₂) و آرگون ۱۸۰ TPD (≥۹۹.۹۹۹٪).</p>
+                            </div>
+                            <div class="glass-card p-3.5 rounded-xl border-r-4 border-r-emerald-400">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>4000 – پساب و ZLD (ETP)</span>
+                                    <span class="font-mono text-emerald-300">€600M (12%)</span>
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-1">تصفیه پساب ۳٬۲۰۰ m³/h با بازیافت آب ≥۹۵٪ و سیستم تبخیر/کریستالیزاسیون ZLD.</p>
+                            </div>
+                            <div class="glass-card p-3.5 rounded-xl border-r-4 border-r-amber-400 sm:col-span-2">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>5000 – آفسایت و شبکه‌های توزیع (OSD)</span>
+                                    <span class="font-mono text-amber-300">€950M (19%)</span>
+                                </div>
+                                <p class="text-[11px] text-slate-300 mt-1">مخازن ذخیره سوخت/آب/شیمیایی، خطوط لوله بین‌واحدی، پایپ‌رک‌ها و کنترل یکپارچه DCS/SIS/SCADA.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== TAB 2: DOCUMENTS ==================== -->
+            <section id="tab-documents" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 glass-panel rounded-2xl p-6 space-y-5">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-file-arrow-up text-cyan-400"></i>
+                                بارگذاری و ثبت اسناد در پایگاه دانش
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">فایل‌ها یا متون الحاقیه و فیدیک را اضافه کنید تا در پرسش و پاسخ و تحلیل بندها استفاده شوند.</p>
+                        </div>
+
+                        <label for="main-file-upload" class="border-2 border-dashed border-cyan-500/40 hover:border-cyan-400 bg-blue-950/30 rounded-2xl p-7 flex flex-col items-center justify-center text-center cursor-pointer transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center mb-3 shadow-neon-cyan">
+                                <i class="fa-solid fa-cloud-arrow-up text-2xl text-white"></i>
+                            </div>
+                            <span class="text-sm font-bold text-white">انتخاب یا رها کردن فایل‌ها</span>
+                            <span class="text-xs text-slate-400 mt-1">پشتیبانی از TXT، MD، CSV، JSON، PDF، DOCX و سایر اسناد</span>
+                            <input id="main-file-upload" type="file" multiple class="hidden" onchange="handleFileUpload(this.files)">
+                        </label>
+
+                        <div class="pt-4 border-t border-blue-500/20 space-y-3">
+                            <h4 class="text-xs font-bold text-cyan-300">افزودن مستقیم متن بند / الحاقیه / یادداشت فیدیک:</h4>
+                            <input id="custom-doc-title" type="text" placeholder="عنوان سند (مثلاً: الحاقیه شرایط خصوصی فاینانس)" class="w-full bg-cyber-950/80 border border-blue-500/30 rounded-xl px-3.5 py-2 text-xs text-white focus:border-cyan-400 focus:outline-none">
+                            <textarea id="custom-doc-content" rows="4" placeholder="متن مورد نظر را اینجا وارد کنید..." class="w-full bg-cyber-950/80 border border-blue-500/30 rounded-xl p-3.5 text-xs text-white focus:border-cyan-400 focus:outline-none"></textarea>
+                            <button onclick="addCustomTextDocument()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-bold shadow-neon-blue transition-all">
+                                <i class="fa-solid fa-plus ml-1"></i> ثبت در پایگاه دانش
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 glass-panel rounded-2xl p-6 flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-extrabold text-white">اسناد موجود در پایگاه دانش</h3>
+                            <span id="total-docs-count" class="text-xs font-mono bg-blue-500/20 text-cyan-300 px-3 py-1 rounded-full">۵ سند فعال</span>
+                        </div>
+
+                        <div id="full-doc-list" class="space-y-2.5 mb-5 max-h-64 overflow-y-auto pr-1"></div>
+
+                        <div class="flex-1 bg-cyber-950/90 border border-blue-500/25 rounded-2xl p-4 flex flex-col">
+                            <div class="flex items-center justify-between border-b border-blue-500/20 pb-2.5 mb-3">
+                                <span id="viewer-doc-title" class="text-xs font-bold text-cyan-400">پیش‌نمایش محتوای سند</span>
+                                <button onclick="sendSelectedDocToAnalyzer()" class="text-[11px] bg-purple-600/30 hover:bg-purple-600/50 border border-purple-400/40 text-purple-200 px-3 py-1 rounded-lg transition-all">
+                                    <i class="fa-solid fa-microscope ml-1"></i> ارسال به تحلیل‌گر بندها
+                                </button>
+                            </div>
+                            <div id="viewer-doc-body" class="text-xs text-slate-300 leading-relaxed overflow-y-auto max-h-60 whitespace-pre-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== TAB 3: ANALYZER ==================== -->
+            <section id="tab-analyzer" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-6 glass-panel rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass-chart text-purple-400"></i>
+                                تحلیل‌گر حقوقی، فنی و مالی بندها
+                            </h3>
+                            <span class="text-[11px] font-mono text-purple-300 bg-purple-500/15 px-2.5 py-0.5 rounded-full">FIDIC 2017 & EPCC+F</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                            <button onclick="loadClausePreset('4.1')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Clause 4.1 & 5.1</span>
+                                تناسب با هدف و داده‌ها
+                            </button>
+                            <button onclick="loadClausePreset('4.12')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Clause 4.12 & FM</span>
+                                ریسک زمین و فورس ماژور
+                            </button>
+                            <button onclick="loadClausePreset('8.8')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Delay & PLD Cap</span>
+                                خسارت تأخیر و عملکرد
+                            </button>
+                            <button onclick="loadClausePreset('20.2')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Clause 20.2</span>
+                                اخطار ۲۸ روزه Time-Bar
+                            </button>
+                            <button onclick="loadClausePreset('1.14')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Liability & Bonds</span>
+                                تضامین و سقف مسئولیت
+                            </button>
+                            <button onclick="loadClausePreset('F-CP')" class="text-right p-2.5 rounded-xl bg-blue-950/60 hover:bg-blue-900/60 border border-blue-500/30 text-xs text-cyan-200 transition-all">
+                                <span class="font-mono font-bold block text-cyan-400">Finance +F / OECD</span>
+                                بسته مالی ۸۵/۱۵ و نفاذ
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="text-xs font-bold text-slate-300 block mb-1.5">متن بند یا شرط قراردادی:</label>
+                            <textarea id="clause-input-text" rows="6" class="w-full bg-cyber-950/90 border border-blue-500/30 focus:border-purple-400 rounded-xl p-4 text-xs text-white leading-relaxed focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button onclick="analyzeContractClause()" class="flex-1 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs font-extrabold shadow-neon-purple transition-all">
+                                <i class="fa-solid fa-wand-magic-sparkles ml-1.5"></i> اجرای تحلیل جامع
+                            </button>
+                            <button onclick="document.getElementById('clause-input-text').value=''" class="px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold">
+                                پاک کردن
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 glass-panel rounded-2xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-blue-500/20 pb-3 mb-4">
+                                <h3 class="text-base font-extrabold text-white">گزارش کارشناسی و سنجش ریسک</h3>
+                                <span id="risk-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">آماده تحلیل</span>
+                            </div>
+
+                            <div id="clause-analysis-result" class="space-y-4 text-xs leading-relaxed"></div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-blue-500/20 flex justify-end">
+                            <button onclick="transferAnalysisToLetter()" class="px-4 py-2 rounded-xl bg-emerald-600/25 hover:bg-emerald-600/40 border border-emerald-500/40 text-emerald-300 text-xs font-bold transition-all">
+                                <i class="fa-solid fa-file-export ml-1"></i> انتقال تحلیل به تولیدکننده نامه حقوقی
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== TAB 4: LEGAL LETTER GENERATOR ==================== -->
+            <section id="tab-letter" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-5 glass-panel rounded-2xl p-6 space-y-4">
+                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-emerald-400"></i>
+                            تولیدکننده نامه‌ها و اخطارهای رسمی
+                        </h3>
+                        <p class="text-xs text-slate-400">صدور پیش‌نویس مکاتبات قراردادی بر اساس فیدیک ۲۰۱۷ و قرارداد EPCC+F.</p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">نوع نامه / اخطار:</label>
+                                <select id="letter-type" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl px-3.5 py-2.5 text-xs text-white focus:border-emerald-400 focus:outline-none">
+                                    <option value="notice_20_2">۱. اخطار اولیه ادعا (Notice of Claim - Clause 20.2.1 - مهلت ۲۸ روزه)</option>
+                                    <option value="force_majeure">۲. اعلان وقوع رویداد فورس ماژور / استثنایی و تعلیق خسارت تأخیر</option>
+                                    <option value="feedstock_delay">۳. اخطار تأخیر در تأمین خوراک / یوتیلیتی مرحله راه‌اندازی</option>
+                                    <option value="oral_instruction">۴. استعلام کتبی دستور شفاهی (مهلت ۷ روزه)</option>
+                                    <option value="daab_referral">۵. درخواست ارجاع اختلاف به هیئت حل اختلاف (DAB / DAAB)</option>
+                                </select>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="text-xs font-bold text-slate-300 block mb-1">شماره قرارداد / پروژه:</label>
+                                    <input id="letter-project" type="text" value="EPCC+F/UTIL/2026/001 - تامین یوتیلیتی مجتمع پتروشیمی" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl px-3 py-2 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold text-slate-300 block mb-1">تاریخ:</label>
+                                    <input id="letter-date" type="text" value="۱۴۰۵/۰۹/۰۶ (2026-11-27)" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl px-3 py-2 text-xs text-white">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="text-xs font-bold text-slate-300 block mb-1">فرستنده:</label>
+                                    <input id="letter-sender" type="text" value="شرکت گاما (پیمانکار EPCC+F)" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl px-3 py-2 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="text-xs font-bold text-slate-300 block mb-1">مخاطب:</label>
+                                    <input id="letter-recipient" type="text" value="شرکت زیگما (مشاور) و شرکت الفا (کارفرما)" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl px-3 py-2 text-xs text-white">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="text-xs font-bold text-slate-300 block mb-1">شرح واقعه و مستندات:</label>
+                                <textarea id="letter-facts" rows="4" class="w-full bg-cyber-950 border border-blue-500/30 rounded-xl p-3 text-xs text-white leading-relaxed">بروز رویداد مؤثر بر مسیر بحرانی برنامه ۳۶ ماهه و ضرورت حفظ حقوق زمانی و مالی مطابق قرارداد و شرایط عمومی فیدیک ۲۰۱۷.</textarea>
+                            </div>
+
+                            <button onclick="generateLegalLetter()" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white text-xs font-extrabold shadow-lg transition-all">
+                                <i class="fa-solid fa-file-contract ml-1.5"></i> تولید متن رسمی نامه حقوقی
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 glass-panel rounded-2xl p-6 flex flex-col">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-blue-500/20 pb-3 mb-4">
+                            <h3 class="text-base font-extrabold text-white">پیش‌نویس نامه آماده ارسال</h3>
+                            <div class="flex items-center gap-2">
+                                <button onclick="copyLetterToClipboard()" class="px-3.5 py-1.5 rounded-xl bg-blue-600/30 hover:bg-blue-600/50 border border-blue-400/40 text-cyan-200 text-xs font-bold transition-all">
+                                    <i class="fa-regular fa-copy ml-1"></i> کپی متن
+                                </button>
+                                <button onclick="downloadLetterFile()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-400/40 text-emerald-200 text-xs font-bold transition-all">
+                                    <i class="fa-solid fa-download ml-1"></i> دانلود فایل
+                                </button>
+                            </div>
+                        </div>
+
+                        <textarea id="generated-letter-output" class="flex-1 w-full bg-cyber-950/95 border border-blue-500/25 rounded-2xl p-5 text-xs text-slate-200 leading-7 font-sans focus:outline-none focus:border-emerald-400 min-h-[380px]"></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== TAB 5: VOICE & TEXT AI ASSISTANT ==================== -->
+            <section id="tab-assistant" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Persian Voice Copilot Console (4 cols) -->
+                    <div class="lg:col-span-4 glass-panel rounded-2xl p-6 flex flex-col items-center justify-between text-center">
+                        <div class="w-full">
+                            <span class="text-[11px] font-mono text-purple-400 bg-purple-500/15 px-3 py-1 rounded-full">PERSIAN VOICE COPILOT (FA-IR)</span>
+                            <h3 class="text-lg font-extrabold text-white mt-3">دستیار صوتی مسلط به فارسی</h3>
+                            <p class="text-xs text-slate-400 mt-1">صحبت کنید تا صدای فارسی شما شنیده و به زبان فارسی تحلیل شود و پاسخ به صورت صوتی فارسی قرائت گردد.</p>
+                        </div>
+
+                        <div class="my-6 relative flex items-center justify-center">
+                            <div id="voice-pulse-ring" class="absolute w-36 h-36 rounded-full bg-gradient-to-tr from-blue-600/30 to-purple-600/30 hidden voice-ring"></div>
+                            <button id="voice-mic-btn" onclick="toggleVoiceListening()" class="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 hover:scale-105 text-white flex flex-col items-center justify-center shadow-neon-purple transition-all">
+                                <i id="voice-mic-icon" class="fa-solid fa-microphone text-3xl"></i>
+                                <span id="voice-mic-label" class="text-[10px] font-bold mt-1.5">شروع گفتگو</span>
+                            </button>
+                        </div>
+
+                        <div class="w-full space-y-3">
+                            <div id="voice-equalizer" class="h-8 flex items-center justify-center gap-1.5 opacity-30 transition-opacity">
+                                <span class="w-1.5 bg-cyan-400 rounded-full eq-bar"></span>
+                                <span class="w-1.5 bg-blue-400 rounded-full eq-bar"></span>
+                                <span class="w-1.5 bg-purple-400 rounded-full eq-bar"></span>
+                                <span class="w-1.5 bg-cyan-400 rounded-full eq-bar"></span>
+                                <span class="w-1.5 bg-indigo-400 rounded-full eq-bar"></span>
+                            </div>
+
+                            <p id="voice-status-text" class="text-xs text-cyan-300 font-medium min-h-[20px]">آماده شنیدن صدای فارسی شما...</p>
+
+                            <div id="voice-live-transcript" class="bg-cyber-950/90 border border-cyan-500/25 rounded-xl px-3 py-2.5 text-[11px] text-slate-200 min-h-[42px] text-right leading-relaxed">
+                                متن تشخیص‌داده‌شده از گفتار فارسی اینجا نمایش داده می‌شود...
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-right">
+                                <div class="bg-cyber-950/80 border border-blue-500/20 rounded-xl p-2">
+                                    <label for="persian-voice-select" class="text-[10px] text-slate-400 block mb-1">صدای فارسی خروجی</label>
+                                    <select id="persian-voice-select" onchange="onPersianVoiceChange()" class="w-full bg-transparent text-[11px] text-cyan-200 focus:outline-none">
+                                        <option value="auto" class="bg-cyber-950 text-cyan-200">خودکار (بومی + موتور فارسی)</option>
+                                    </select>
+                                </div>
+                                <div class="bg-cyber-950/80 border border-blue-500/20 rounded-xl p-2">
+                                    <label for="persian-rate-range" class="text-[10px] text-slate-400 flex justify-between mb-1">
+                                        <span>سرعت گفتار</span>
+                                        <span id="persian-rate-val" class="font-mono text-cyan-300">1.0x</span>
+                                    </label>
+                                    <input id="persian-rate-range" type="range" min="0.75" max="1.35" step="0.05" value="1.0" oninput="document.getElementById('persian-rate-val').textContent = this.value + 'x'" class="w-full accent-cyan-400 h-1.5">
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-2 pt-2 border-t border-blue-500/20">
+                                <div class="flex items-center gap-2">
+                                    <input type="checkbox" id="tts-auto-read" checked class="accent-cyan-400 rounded">
+                                    <label for="tts-auto-read" class="text-xs text-slate-300">پاسخ صوتی فارسی خودکار</label>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <button type="button" onclick="testPersianVoiceEngine()" class="text-[11px] text-cyan-200 hover:text-white bg-cyan-500/15 border border-cyan-500/30 px-2.5 py-1 rounded-lg transition-all">
+                                        <i class="fa-solid fa-play ml-1"></i> تست صدا
+                                    </button>
+                                    <button type="button" onclick="stopSpeaking()" class="text-[11px] text-rose-300 hover:text-rose-200 bg-rose-500/15 border border-rose-500/30 px-2.5 py-1 rounded-lg transition-all">
+                                        <i class="fa-solid fa-volume-xmark ml-1"></i> توقف
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q&A Chat Workspace (8 cols) -->
+                    <div class="lg:col-span-8 glass-panel rounded-2xl p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b border-blue-500/20 pb-3 mb-4">
+                                <div class="flex items-center gap-2.5">
+                                    <i class="fa-solid fa-brain text-cyan-400 text-lg"></i>
+                                    <div>
+                                        <h3 class="text-base font-extrabold text-white">میز پرسش و پاسخ تخصصی قراردادهای EPCC+F و FIDIC</h3>
+                                        <p class="text-[11px] text-slate-400">استخراج پاسخ از متن قرارداد ۵ میلیارد یورویی، پیوست‌ها، فیدیک ۲۰۱۷ و اسناد آپلودی</p>
+                                    </div>
+                                </div>
+                                <button onclick="clearFullChat()" class="text-xs text-slate-400 hover:text-rose-400 px-2.5 py-1 rounded-lg bg-slate-800/60">
+                                    <i class="fa-solid fa-trash-can ml-1"></i> پاک‌سازی
+                                </button>
+                            </div>
+
+                            <div id="full-chat-messages" class="bg-cyber-950/85 border border-blue-500/20 rounded-2xl p-4 h-80 overflow-y-auto space-y-4 text-xs leading-relaxed">
+                                <div class="flex items-start gap-3">
+                                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shrink-0">
+                                        <i class="fa-solid fa-robot"></i>
+                                    </div>
+                                    <div class="bg-blue-950/60 border border-blue-500/25 rounded-2xl p-3.5 text-slate-200 max-w-2xl">
+                                        سلام! من دستیار صوتی و متنی فارسی قراردادهای <strong class="text-cyan-400">EPCC+F</strong> و <strong class="text-purple-300">FIDIC Silver Book 2017</strong> هستم. سؤال خود را به فارسی بپرسید تا مستند به قرارداد و فیدیک پاسخ دهم و پاسخ را به صورت فارسی برای شما بخوانم.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handleFullChatSubmit(event)" class="mt-4 flex gap-2.5">
+                            <input id="full-chat-input" type="text" placeholder="سؤال خود را به زبان فارسی بنویسید..." class="flex-1 bg-cyber-950 border border-blue-500/30 focus:border-cyan-400 rounded-xl px-4 py-3 text-xs text-white focus:outline-none">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-extrabold shadow-neon-blue transition-all">
+                                ارسال پرسش <i class="fa-solid fa-paper-plane mr-1"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== TAB 6: MATRIX ==================== -->
+            <section id="tab-matrix" class="tab-content hidden space-y-6">
+                <div class="glass-panel rounded-2xl p-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-white">ماتریس جامع اعداد، سقف‌های مالی و مهلت‌های قرارداد و FIDIC</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">قابلیت جستجوی سریع در اعداد، درصدها، روزها و مواد قراردادی</p>
+                        </div>
+                        <input id="matrix-search" onkeyup="filterMatrixTable()" type="text" placeholder="جستجو در جدول (مثلاً: ۲۸ روز، CBS، ۵۰۰ میلیون، ICC)..." class="bg-cyber-950 border border-blue-500/30 rounded-xl px-3.5 py-2 text-xs text-white focus:border-cyan-400 focus:outline-none w-72">
+                    </div>
+
+                    <div class="overflow-x-auto rounded-xl border border-blue-500/20">
+                        <table id="params-table" class="w-full text-right text-xs">
+                            <thead class="bg-blue-950/90 text-cyan-300 border-b border-blue-500/30">
+                                <tr>
+                                    <th class="p-3.5 font-bold">شاخص / بند قراردادی</th>
+                                    <th class="p-3.5 font-bold">مقدار / مهلت / درصد</th>
+                                    <th class="p-3.5 font-bold">مرجع</th>
+                                    <th class="p-3.5 font-bold">اثر حقوقی و اجرایی</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-blue-500/15 text-slate-200">
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">مبلغ کل مقطوع قرارداد EPCC+F</td>
+                                    <td class="p-3.5 text-cyan-300 font-bold">۵,۰۰۰,۰۰۰,۰۰۰ یورو (Lump Sum)</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۳-۱ قرارداد</td>
+                                    <td class="p-3.5">شامل مهندسی، خرید، ساخت، حمل، بیمه، آزمایش‌ها، آموزش و تأمین مالی</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">ساختار تأمین مالی (+F) و سهم نقدی</td>
+                                    <td class="p-3.5 text-emerald-300 font-bold">۸۵٪ فاینانس (۴.۲۵B €) + ۱۵٪ نقدی (۷۵۰M €)</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۳-۲ و OECD</td>
+                                    <td class="p-3.5">دوره تنفس ۳ سال و بازپرداخت ۷ سال پس از تحویل موقت</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">پیش‌پرداخت و ضمانت‌نامه‌ها</td>
+                                    <td class="p-3.5 text-cyan-300 font-bold">۱۰٪ پیش‌پرداخت (۵۰۰M €) ظرف ۳۰ روز | APG و PG هر کدام ۵۰۰M €</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۳-۳ و پیوست دوم</td>
+                                    <td class="p-3.5">ضمانت‌نامه‌های غیرقابل برگشت، بی‌قید و شرط و عندالمطالبه (On First Demand)</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">مدت اجرا تا PAC و دوره تضمین عملکرد</td>
+                                    <td class="p-3.5 text-cyan-300 font-bold">۳۶ ماه تا PAC + ۱۲ ماه تضمین تا FAC</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۴ قرارداد</td>
+                                    <td class="p-3.5">حداقل در دسترس بودن سالانه ۹۸.۵٪ و آموزش حداقل ۲۴۰ نفر-ماه</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">خسارت تأخیر و سقف جرایم عملکردی (PLD)</td>
+                                    <td class="p-3.5 text-amber-300 font-bold">۰.۰۵٪ روزانه (۲.۵M €/روز) تا سقف ۱۰٪ (۵۰۰M €)</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۴ و پیوست سوم</td>
+                                    <td class="p-3.5">محاسبه PLD بر اساس انحراف اصلاح‌شده ضربدر ضریب خسارت واحد تا سقف ۱۰٪</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-rose-300">مهلت اخطار ادعا و لایحه تفصیلی فیدیک</td>
+                                    <td class="p-3.5 text-rose-400 font-extrabold">۲۸ روز اخطار اولیه | ۸۴ روز لایحه تفصیلی</td>
+                                    <td class="p-3.5 font-mono text-[11px]">FIDIC Cl. 20.2.1 & 20.2.4</td>
+                                    <td class="p-3.5">عدم رعایت مهلت ۲۸ روزه در فیدیک می‌تواند به اسقاط حق (Time-Bar) منجر شود</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">فورس ماژور و فسخ طولانی‌مدت</td>
+                                    <td class="p-3.5 text-cyan-300 font-bold">اعلام ظرف ۷ روز (گزارش ۲۱ روز) | فسخ >۱۲۰ یا ۱۸۰ روز</td>
+                                    <td class="p-3.5 font-mono text-[11px]">پیوست دوم بخش ۲</td>
+                                    <td class="p-3.5">تعلیق تعهدات، تمدید زمان بدون خسارت تأخیر و حق فسخ با اخطار ۳۰ روزه</td>
+                                </tr>
+                                <tr class="hover:bg-blue-900/20">
+                                    <td class="p-3.5 font-bold text-white">حل اختلاف، DAB و داوری ICC</td>
+                                    <td class="p-3.5 text-emerald-300 font-bold">مذاکره ۳۰ روزه -> DAB ۶۰ روزه -> داوری ICC سه‌نفره</td>
+                                    <td class="p-3.5 font-mono text-[11px]">ماده ۶ و پیوست دوم بخش ۳</td>
+                                    <td class="p-3.5">تصمیم DAB موقتاً لازم‌الاجراست؛ رأی دیوان ICC قطعی و نهایی است</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // ==================== KNOWLEDGE BASE (CONTRACT + ANNEXES + FIDIC) ====================
+        const documentsStore = [
+            {
+                id: 'doc-main-contract',
+                title: 'قرارداد بین‌المللی EPCC+F تامین یوتیلیتی مجتمع پتروشیمی (EPCC+F/UTIL/2026/001)',
+                type: 'متن اصلی قرارداد',
+                size: '7 Articles | Indexed',
+                date: '۱۴۰۵/۰۹/۰۶',
+                content: `شماره قرارداد: EPCC+F/UTIL/2026/001 | تاریخ انعقاد: ۱۴۰۵/۰۹/۰۶ (۲۷ نوامبر ۲۰۲۶) | مبلغ کل مقطوع (Lump Sum): ۵,۰۰۰,۰۰۰,۰۰۰ یورو (پنج میلیارد یورو).
+طرفین: کارفرما شرکت الفا، پیمانکار شرکت گاما، مشاور کارفرما شرکت زیگما.
+پنج واحد یوتیلیتی (ماده ۲):
+1. واحد آب و آبگیر (WWT - CBS 1000): ورودی آب خام 12,000 m³/h و تولید آب فرآیندی و دی‌مینراله 4,500 m³/h (مبلغ ۶۵۰,۰۰۰,۰۰۰ یورو / ۱۳٪).
+2. واحد نیروگاه و بخار (CCPP - CBS 2000): برق 650 MW و بخار فرآیندی 1,200 t/h (مبلغ ۱,۸۵۰,۰۰۰,۰۰۰ یورو / ۳۷٪).
+3. واحد تفکیک هوا (ASU - CBS 3000): اکسیژن 4,800 TPD، نیتروژن 6,200 TPD و آرگون 180 TPD (مبلغ ۹۵۰,۰۰۰,۰۰۰ یورو / ۱۹٪).
+4. واحد پساب و بازیافت (ETP & ZLD - CBS 4000): ظرفیت تصفیه پساب 3,200 m³/h با بازیافت ≥۹۵٪ و ZLD (مبلغ ۶۰۰,۰۰۰,۰۰۰ یورو / ۱۲٪).
+5. واحد آفسایت و شبکه‌های توزیع (OSD - CBS 5000): مخازن ذخیره، پمپاژ، خطوط لوله بین‌واحدی، پست‌های برق و DCS/SCADA (مبلغ ۹۵۰,۰۰۰,۰۰۰ یورو / ۱۹٪).
+تأمین مالی (+F - ماده ۳): ۸۵٪ معادل ۴,۲۵۰,۰۰۰,۰۰۰ یورو با دوره تنفس ۳ سال و بازپرداخت ۷ سال پس از تحویل موقت + ۱۵٪ سهم نقدی کارفرما معادل ۷۵۰,۰۰۰,۰۰۰ یورو. پیش‌پرداخت ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو) ظرف ۳۰ روز تقویمی؛ کسور حسن انجام کار ۵٪.
+زمان‌بندی و خسارت تأخیر (ماده ۴): ۳۶ ماه شمسی تا تحویل موقت (PAC) + ۱۲ ماه دوره تضمین عملکرد تا تحویل قطعی (FAC). خسارت تأخیر روزانه ۰.۰۵٪ (۲,۵۰۰,۰۰۰ یورو/روز) تا سقف ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو).
+شرایط خصوصی (ماده ۷): راندمان حرارتی نیروگاه حداقل ۵۲٪؛ خلوص ASU: اکسیژن ≥۹۹.۶٪، نیتروژن ≤۵ ppm O₂، آرگون ≥۹۹.۹۹۹٪؛ هدایت الکتریکی آب DM ≤0.1 μS/cm؛ بازیافت پساب ≥۹۵٪؛ در دسترس بودن سالانه ≥۹۸.۵٪؛ تغییرات دامنه کار تا ±۱۵٪؛ آموزش حداقل ۲۴۰ نفر-ماه.`
+            },
+            {
+                id: 'doc-annex-1',
+                title: 'پیوست اول – مشخصات فنی، استانداردها و شرایط آزمون عملکردی',
+                type: 'پیوست فنی',
+                size: '7 Sections | Indexed',
+                date: '۱۴۰۵/۰۹/۰۶',
+                content: `شرایط مرجع سایت: دمای خشک -5°C تا +46°C (میانگین 28°C)، رطوبت نسبی تا 85%، فشار 101.3 kPa، ارتفاع 10 m، حاشیه طراحی حداقل 10%.
+آزمون عملکردی WWT: 72 ساعت کارکرد پیوسته در بار 100% و 4 ساعت در 110%؛ استانداردها AWWA, ASTM, API 650, ASME Sec VIII, API 610, ASME B31.3, NFPA 20.
+آزمون عملکردی CCPP: 72 ساعت بار پایه 100% و 4 ساعت حداکثر بار؛ بخار HP (450 t/h, 42 barg, 400°C)، MP (450 t/h, 14 barg, 260°C)، LP (300 t/h, 4.5 barg, 185°C)؛ استانداردها ISO 2314, ASME PTC 22/6/4.4, IEC 60076/62271, IEEE 80.
+آزمون عملکردی ASU: 72 ساعت عملکرد پیوسته در ظرفیت اسمی؛ استانداردها EIGA, CGA, ASME Sec VIII, API 617/614, AHRI/ALPEMA.
+آزمون عملکردی ETP & ZLD: 7 روز (168 ساعت) با پساب واقعی در بار 85%–105%؛ COD ≤ 30 mg/L، BOD₅ ≤ 10 mg/L، TSS ≤ 5 mg/L، Oil & Grease ≤ 2 mg/L.
+آزمون عملکردی OSD: 72 ساعت عملکرد یکپارچه؛ مخازن با Bund Wall حداقل 110% بزرگ‌ترین مخزن، DCS/SIS با استاندارد IEC 61508/61511 (SIL 2/3).`
+            },
+            {
+                id: 'doc-annex-2',
+                title: 'پیوست دوم – الحاقیه حقوقی تضامین بانکی، فورس ماژور و داوری بین‌المللی (ICC)',
+                type: 'پیوست حقوقی',
+                size: '3 Sections | Indexed',
+                date: '۱۴۰۵/۰۹/۰۶',
+                content: `تضامین بانکی: غیرقابل برگشت، بی‌قید و شرط و عندالمطالبه (On First Demand). ضمانت پیش‌پرداخت ۵۰۰,۰۰۰,۰۰۰ یورو ظرف ۲۱ روز؛ ضمانت حسن انجام تعهدات ۵۰۰,۰۰۰,۰۰۰ یورو ظرف ۲۱ روز و معتبر تا ۶۰ روز پس از PAC (تمدید حداقل ۳۰ روز قبل از انقضا)؛ ضمانت دوره تضمین عملکرد ۲۵۰,۰۰۰,۰۰۰ یورو (۵٪) تا ۶۰ روز پس از FAC.
+فورس ماژور: اعلام کتبی ظرف ۷ روز و گزارش مستند ظرف ۲۱ روز؛ تعلیق تعهدات، تمدید زمان و عدم تعلق خسارت تأخیر؛ حق فسخ با اخطار ۳۰ روزه در صورت استمرار بیش از ۱۲۰ روز متوالی یا ۱۸۰ روز مجموع.
+حل اختلاف: ۱) مذاکره دوستانه ۳۰ روزه؛ ۲) ارجاع ظرف ۱۵ روز به هیئت حل اختلاف (DAB) سه‌نفره با تصمیم موقتاً لازم‌الاجرا ظرف ۶۰ روز (اعتراض ظرف ۲۸ روز)؛ ۳) داوری قطعی و لازم‌الاجرا تحت قواعد اتاق بازرگانی بین‌المللی (ICC) با دیوان سه‌نفره.`
+            },
+            {
+                id: 'doc-annex-3-4',
+                title: 'پیوست سوم و چهارم – ماتریس ریسک، فرمول PLD، مایلستون‌ها و فرمول صورت‌وضعیت IPC',
+                type: 'پیوست مالی و اجرایی',
+                size: 'Milestones & Formulas | Indexed',
+                date: '۱۴۰۵/۰۹/۰۶',
+                content: `فرمول خسارت عملکردی: PLD_i = max(0, Δ_i × k_i) و جمع کل PLD_total = min(Cap_PLD, Σ PLD_i) با سقف کل ۵۰۰,۰۰۰,۰۰۰ یورو (۱۰٪ مبلغ قرارداد).
+مایلستون‌های ۳۶ ماهه: M00 (0%)، M01 (10% - پیش‌پرداخت 500M €)، M06 (20%)، M12 (36%)، M18 (56%)، M24 (76%)، M30 (90%)، M33 (96%)، M36 (100% - تحویل موقت PAC).
+فرمول صورت‌وضعیت ماهانه IPC_t: کارکرد ناخالص تجمعی G_t = Σ(C_j × P_{j,t}) + V_t؛ استهلاک پیش‌پرداخت R_{adv,t}؛ کسور حسن انجام کار R_{ret,t} (۵٪)؛ خالص پرداختی IPC_t = (G_t - R_{adv,t} - R_{ret,t}) - Σ IPC_k - D_t که بین ۸۵٪ سهم تأمین مالی و ۱۵٪ سهم نقدی کارفرما تقسیم می‌شود.`
+            },
+            {
+                id: 'doc-fidic-guide',
+                title: 'چارچوب مرجع FIDIC Silver Book 2017، OECD و داوری بین‌المللی',
+                type: 'مرجع استاندارد فیدیک',
+                size: 'FIDIC 2017 | Indexed',
+                date: 'مرجع تخصصی',
+                content: `در قراردادهای کلید در دست (EPCC / Silver Book 2017):
+- مهلت اخطار اولیه ادعا (Notice of Claim): ۲۸ روز تقویمی از زمان آگاهی یا قابلیت آگاهی (عدم رعایت می‌تواند منجر به اسقاط حق / Time-Bar شود) و لایحه تفصیلی ۸۴ روزه.
+- تعهد به نتیجه (Fitness for Purpose) و بررسی الزامات کارفرما و داده‌های مبنا با استثناهای مقرر.
+- توازن ریسک و اصول طلایی فیدیک (Golden Principles)، بررسی تغییر قوانین پس از تاریخ مبنا (۲۸ روز پیش از تسلیم پیشنهاد)، تأخیرات هم‌زمان (Concurrent Delay)، هیئت حل اختلاف (DAB / DAAB) و داوری بین‌المللی ICC.`
+            }
+        ];
+
+        let selectedDocId = documentsStore[0].id;
+        let lastAnalysisSummary = '';
+
+        // ==================== TAB SWITCHING & TOASTS ====================
+        const tabTitles = {
+            overview: 'داشبورد جامع قرارداد EPCC+F یوتیلیتی پتروشیمی (۵ میلیارد یورو) و FIDIC Silver 2017',
+            documents: 'مخزن اسناد قرارداد، پیوست‌ها، فیدیک و باکس آپلود مدارک',
+            analyzer: 'تحلیل‌گر حقوقی، فنی و مالی بندها، CBS و خسارات عملکردی (PLD)',
+            letter: 'تولیدکننده هوشمند نامه‌ها و اخطارهای رسمی قرارداد و فیدیک',
+            assistant: 'دستیار صوتی مسلط به فارسی و میز پرسش و پاسخ هوشمند',
+            matrix: 'ماتریس جامع اعداد، سقف‌ها، مایلستون‌ها و سازوکار حل اختلاف'
+        };
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            const titleEl = document.getElementById('page-title');
+            if (titleEl && tabTitles[tabId]) titleEl.textContent = tabTitles[tabId];
+
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && !sidebar.classList.contains('translate-x-full') && window.innerWidth < 1024) {
+                sidebar.classList.add('translate-x-full');
+            }
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.remove('translate-x-full');
+        });
+        document.getElementById('close-sidebar-btn').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.add('translate-x-full');
+        });
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const styles = {
+                info: 'border-cyan-400/50 bg-blue-950/95 text-cyan-200',
+                success: 'border-emerald-400/50 bg-emerald-950/95 text-emerald-200',
+                warning: 'border-amber-400/50 bg-amber-950/95 text-amber-200',
+                error: 'border-rose-400/50 bg-rose-950/95 text-rose-200'
+            };
+            const icons = {
+                info: 'fa-circle-info text-cyan-400',
+                success: 'fa-circle-check text-emerald-400',
+                warning: 'fa-triangle-exclamation text-amber-400',
+                error: 'fa-circle-xmark text-rose-400'
+            };
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto glass-panel border ${styles[type] || styles.info} rounded-xl p-3.5 shadow-xl flex items-center gap-3 text-xs font-medium transition-all duration-300`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.info} text-base shrink-0"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3600);
+        }
+
+        // ==================== DOCUMENTS & UPLOAD ====================
+        function renderDocuments() {
+            const overviewList = document.getElementById('overview-doc-list');
+            const fullList = document.getElementById('full-doc-list');
+            document.getElementById('doc-badge').textContent = documentsStore.length;
+            document.getElementById('total-docs-count').textContent = `${documentsStore.length} سند فعال`;
+
+            overviewList.innerHTML = documentsStore.slice(0, 3).map(doc => `
+                <div onclick="selectDocument('${doc.id}'); switchTab('documents');" class="p-2.5 rounded-xl bg-blue-950/50 hover:bg-blue-900/50 border border-blue-500/20 flex items-center justify-between cursor-pointer transition-all">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <i class="fa-solid fa-file-lines text-cyan-400 shrink-0"></i>
+                        <span class="text-xs text-slate-200 truncate font-medium">${doc.title}</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded shrink-0">Ready</span>
+                </div>
+            `).join('');
+
+            fullList.innerHTML = documentsStore.map(doc => `
+                <div onclick="selectDocument('${doc.id}')" class="p-3 rounded-xl border ${selectedDocId === doc.id ? 'border-cyan-400 bg-blue-900/40 shadow-neon-blue' : 'border-blue-500/20 bg-blue-950/40 hover:bg-blue-900/30'} flex items-center justify-between cursor-pointer transition-all">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-9 h-9 rounded-lg bg-cyan-500/15 flex items-center justify-center text-cyan-400 shrink-0">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <p class="text-xs font-bold text-white truncate">${doc.title}</p>
+                            <p class="text-[11px] text-slate-400 font-mono mt-0.5">${doc.type} • ${doc.size}</p>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-cyan-300 font-bold shrink-0">مشاهده</span>
+                </div>
+            `).join('');
+
+            selectDocument(selectedDocId, false);
+        }
+
+        function selectDocument(docId, notify = false) {
+            selectedDocId = docId;
+            const doc = documentsStore.find(d => d.id === docId) || documentsStore[0];
+            if (!doc) return;
+            document.getElementById('viewer-doc-title').textContent = `سند انتخابی: ${doc.title}`;
+            document.getElementById('viewer-doc-body').textContent = doc.content;
+            if (notify) showToast(`سند «${doc.title}» انتخاب شد.`, 'info');
+        }
+
+        function handleFileUpload(fileList) {
+            if (!fileList || fileList.length === 0) return;
+            Array.from(fileList).forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    let extractedText = '';
+                    if (file.type.startsWith('text/') || /\.(txt|md|csv|json)$/i.test(file.name)) {
+                        extractedText = String(e.target.result || '').slice(0, 60000);
+                    } else {
+                        extractedText = `فایل بارگذاری‌شده: ${file.name}\nحجم: ${(file.size / 1024).toFixed(1)} KB\nاین مدرک در مخزن اسناد قرارداد ثبت شده است. برای تحلیل دقیق متن فایل‌های باینری، بخش‌های کلیدی را می‌توانید در باکس پرسش یا افزودن متن وارد کنید.`;
+                    }
+                    const newDoc = {
+                        id: 'doc-' + Date.now() + '-' + idx,
+                        title: file.name,
+                        type: 'سند آپلودی کاربر',
+                        size: `${(file.size / 1024).toFixed(1)} KB | Indexed`,
+                        date: 'هم‌اکنون',
+                        content: extractedText
+                    };
+                    documentsStore.unshift(newDoc);
+                    selectedDocId = newDoc.id;
+                    renderDocuments();
+                    showToast(`فایل «${file.name}» با موفقیت به مخزن اسناد اضافه شد.`, 'success');
+                };
+
+                if (file.type.startsWith('text/') || /\.(txt|md|csv|json)$/i.test(file.name)) {
+                    reader.readAsText(file);
+                } else {
+                    reader.readAsArrayBuffer(file);
+                }
+            });
+        }
+
+        function addCustomTextDocument() {
+            const title = document.getElementById('custom-doc-title').value.trim();
+            const content = document.getElementById('custom-doc-content').value.trim();
+            if (!title || !content) {
+                showToast('لطفاً عنوان و متن سند را وارد کنید.', 'warning');
+                return;
+            }
+            const newDoc = {
+                id: 'doc-' + Date.now(),
+                title: title,
+                type: 'متن ثبت‌شده توسط کاربر',
+                size: `${content.length} کاراکتر | Indexed`,
+                date: 'هم‌اکنون',
+                content: content
+            };
+            documentsStore.unshift(newDoc);
+            selectedDocId = newDoc.id;
+            document.getElementById('custom-doc-title').value = '';
+            document.getElementById('custom-doc-content').value = '';
+            renderDocuments();
+            showToast('متن جدید به پایگاه دانش قرارداد اضافه شد.', 'success');
+        }
+
+        function sendSelectedDocToAnalyzer() {
+            const doc = documentsStore.find(d => d.id === selectedDocId);
+            if (!doc) return;
+            document.getElementById('clause-input-text').value = doc.content;
+            switchTab('analyzer');
+            analyzeContractClause();
+        }
+
+        // ==================== CLAUSE & RISK ANALYZER ====================
+        const clausePresets = {
+            '4.1': `ماده ۴.۱ و ۵.۱ کتاب نقره‌ای فیدیک و تعهد کلید در دست: پیمانکار مسئول طراحی، تأمین، ساخت و تحویل تأسیسات متناسب با هدف مندرج در قرارداد (Fitness for Purpose) است و داده‌های مناقصه را با رعایت استثناهای مقرر بررسی می‌کند.`,
+            '4.12': `شرایط فیزیکی، فورس ماژور و مدت ۳۶ ماهه: در قرارداد EPCC+F، فورس ماژور با اعلام کتبی ظرف ۷ روز و گزارش ۲۱ روزه موجب تعلیق و تمدید زمان می‌شود و در صورت استمرار بیش از ۱۲۰ یا ۱۸۰ روز حق فسخ ایجاد می‌کند؛ همچنین شرایط مرجع سایت مبنای آزمون‌هاست.`,
+            '8.8': `خسارت تأخیر و خسارت عملکردی (PLD): خسارت تأخیر در تحویل موقت روزانه ۰.۰۵٪ مبلغ قرارداد (۲,۵۰۰,۰۰۰ یورو در روز) تا سقف ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو) است و خسارت عملکردی PLD بر اساس فرمول max(0, Δ_i × k_i) تا سقف ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو) محاسبه می‌شود.`,
+            '20.2': `مهلت اخطار ادعا در فیدیک (Clause 20.2.1): ارسال اخطار کتبی ادعا ظرف ۲۸ روز تقویمی از زمان آگاهی یا قابلیت آگاهی از رویداد و ارائه لایحه تفصیلی ظرف ۸۴ روز تقویمی برای حفظ حقوق زمانی و مالی.`,
+            '1.14': `تضامین بانکی و مسئولیت‌ها: ضمانت پیش‌پرداخت ۵۰۰,۰۰۰,۰۰۰ یورو و ضمانت حسن انجام تعهدات ۵۰۰,۰۰۰,۰۰۰ یورو (هر کدام ۱۰٪) و ضمانت دوره تضمین عملکرد ۲۵۰,۰۰۰,۰۰۰ یورو (۵٪) همراه با کسور حسن انجام کار ۵٪ و سقف‌های مسئولیت قراردادی.`,
+            'F-CP': `ساختار تأمین مالی +F و صورت‌وضعیت IPC: تأمین مالی ۸۵٪ (۴,۲۵۰,۰۰۰,۰۰۰ یورو) با تنفس ۳ سال و بازپرداخت ۷ سال پس از PAC، سهم نقدی ۱۵٪ کارفرما (۷۵۰,۰۰۰,۰۰۰ یورو) و محاسبه صورت‌وضعیت خالص IPC_t پس از استهلاک پیش‌پرداخت و کسور.`
+        };
+
+        function loadClausePreset(key) {
+            document.getElementById('clause-input-text').value = clausePresets[key] || '';
+            analyzeContractClause();
+        }
+
+        function analyzeContractClause() {
+            const text = document.getElementById('clause-input-text').value.trim();
+            if (!text) {
+                showToast('لطفاً متن یک بند را وارد یا انتخاب کنید.', 'warning');
+                return;
+            }
+
+            const resultBox = document.getElementById('clause-analysis-result');
+            const riskBadge = document.getElementById('risk-badge');
+
+            let riskLevel = 'ریسک متوازن / قابل مدیریت';
+            let badgeClass = 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30';
+            let legalNote = 'این بند با اصول توازن ریسک در قراردادهای EPCC+F و کتاب نقره‌ای فیدیک ۲۰۱۷ هم‌راستا است و نیازمند ثبت دقیق سوابق هم‌زمان (Contemporaneous Records) است.';
+            let financialNote = 'آثار مالی و زمانی آن تابع سقف‌های مقرر در قرارداد (از جمله سقف ۱۰٪ خسارت تأخیر و فرمول‌های پیوست سوم و چهارم) است.';
+            let actionNote = 'مستندسازی روزانه وقایع، پایش تقویم مهلت‌ها و اخذ تأیید کتبی مشاور (شرکت زیگما) و کارفرما (شرکت الفا) توصیه می‌شود.';
+
+            if (/۲۸ روز|28|time-bar|اسقاط|۸۴ روز/i.test(text)) {
+                riskLevel = 'حساسیت زمانی بالا (مهلت ۲۸ روزه فیدیک)';
+                badgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+                legalNote = 'رعایت مهلت ۲۸ روزه اخطار اولیه (Notice of Claim) و ۸۴ روزه لایحه تفصیلی در چارچوب فیدیک ۲۰۱۷ ستون فقرات حفظ ادعاهای زمانی و مالی است.';
+                financialNote = 'تأخیر در ارسال اخطار می‌تواند حق مطالبه تمدید مدت (EOT) یا جبران هزینه (Cost) را با چالش جدی مواجه کند.';
+                actionNote = 'ثبت فوری تاریخ آگاهی و ارسال اخطار کتبی رسمی پیش از انقضای روز ۲۸م.';
+            } else if (/فورس ماژور|۱۲۰|۱۸۰|تأخیر|خسارت|pld|۲,۵۰۰,۰۰۰/i.test(text)) {
+                riskLevel = 'ریسک مالی و زمانی مهم (تأخیر / فورس ماژور)';
+                badgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+                legalNote = 'در قرارداد EPCC+F، فورس ماژور با اعلام کتبی ظرف ۷ روز و گزارش ۲۱ روزه بررسی می‌شود و در صورت استمرار بیش از ۱۲۰ یا ۱۸۰ روز حق فسخ ایجاد می‌کند.';
+                financialNote = 'خسارت تأخیر روزانه ۲.۵ میلیون یورو (۰.۰۵٪) تا سقف ۵۰۰ میلیون یورو (۱۰٪) است و در صورت فورس ماژور خسارت تأخیر تعلق نمی‌گیرد.';
+                actionNote = 'مستندسازی دقیق علت و مدت مانع و تفکیک انحراف‌های اصلاح‌شده در آزمون عملکردی.';
+            } else if (/۸۵٪|فاینانس|پیش‌پرداخت|۵۰۰,۰۰۰,۰۰۰|ipc|ضمانت/i.test(text)) {
+                riskLevel = 'ریسک مالی و تضامین (+F / ضمانت‌نامه‌ها)';
+                badgeClass = 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+                legalNote = 'تضامین بانکی باید غیرقابل برگشت، بی‌قید و شرط و عندالمطالبه باشند و در مواعد مقرر (۲۱ روز پس از امضا و تمدید حداقل ۳۰ روز قبل از انقضا) ارائه و تمدید شوند.';
+                financialNote = 'ساختار ۸۵٪ فاینانس (۴.۲۵ میلیارد یورو) و ۱۵٪ سهم نقدی کارفرما (۷۵۰ میلیون یورو) با پیش‌پرداخت ۱۰٪ (۵۰۰ میلیون یورو) و کسور ۵٪ تنظیم شده است.';
+                actionNote = 'هماهنگی مستمر میان صورت‌وضعیت‌های ماهانه IPC، گواهی‌های مشاور و اسناد بسته تأمین مالی.';
+            }
+
+            riskBadge.className = `px-3 py-1 rounded-full text-xs font-bold border ${badgeClass}`;
+            riskBadge.textContent = riskLevel;
+
+            lastAnalysisSummary = `تحلیل بند (${riskLevel}):\n- تحلیل حقوقی: ${legalNote}\n- آثار مالی: ${financialNote}\n- اقدام پیشنهادی: ${actionNote}`;
+
+            resultBox.innerHTML = `
+                <div class="p-3.5 rounded-xl bg-blue-950/60 border border-blue-500/30">
+                    <h4 class="font-bold text-cyan-300 mb-1"><i class="fa-solid fa-scale-balanced ml-1"></i> ۱. تحلیل حقوقی و تطابق با قرارداد و فیدیک</h4>
+                    <p class="text-slate-200">${legalNote}</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30">
+                    <h4 class="font-bold text-purple-300 mb-1"><i class="fa-solid fa-coins ml-1"></i> ۲. آثار مالی، سقف‌ها و ضمانت‌ها</h4>
+                    <p class="text-slate-200">${financialNote}</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30">
+                    <h4 class="font-bold text-emerald-300 mb-1"><i class="fa-solid fa-shield-halved ml-1"></i> ۳. اقدام پیشنهادی مدیر قرارداد</h4>
+                    <p class="text-slate-200">${actionNote}</p>
+                </div>
+            `;
+        }
+
+        function transferAnalysisToLetter() {
+            if (!lastAnalysisSummary) {
+                showToast('ابتدا یک بند را تحلیل کنید.', 'warning');
+                return;
+            }
+            document.getElementById('letter-facts').value = lastAnalysisSummary;
+            switchTab('letter');
+            generateLegalLetter();
+        }
+
+        // ==================== LEGAL LETTER GENERATOR ====================
+        function generateLegalLetter() {
+            const type = document.getElementById('letter-type').value;
+            const project = document.getElementById('letter-project').value;
+            const date = document.getElementById('letter-date').value;
+            const sender = document.getElementById('letter-sender').value;
+            const recipient = document.getElementById('letter-recipient').value;
+            const facts = document.getElementById('letter-facts').value;
+
+            const specs = {
+                notice_20_2: {
+                    subject: 'اخطار رسمی اولیه ادعا (Notice of Claim) مطابق ماده ۲۰.۲.۱ فیدیک ۲۰۱۷ و شرایط قرارداد',
+                    demands: '۱. ثبت رسمی اخطار در مهلت مقرر ۲۸ روزه جهت حفظ حقوق قراردادی؛\n۲. بررسی اثر رویداد بر برنامه زمان‌بندی ۳۶ ماهه و استحقاق تمدید زمان (EOT) و جبران هزینه‌های مرتبط؛\n۳. تسلیم گزارش و لایحه تفصیلی ادعا به همراه سوابق هم‌زمان در مهلت مقرر.'
+                },
+                force_majeure: {
+                    subject: 'اعلان رسمی وقوع رویداد فورس ماژور / استثنایی و درخواست تعلیق خسارت تأخیر',
+                    demands: '۱. ثبت رسمی اعلام کتبی رویداد طبق پیوست دوم قرارداد و شرایط عمومی فیدیک؛\n۲. تعلیق تعهدات متأثر و عدم تعلق خسارت تأخیر روزانه در طول مدت مانع؛\n۳. ارائه گزارش مستند کاهش آثار (Mitigation) و پیگیری وضعیت استمرار رویداد.'
+                },
+                feedstock_delay: {
+                    subject: 'اخطار تأخیر در تأمین خوراک / یوتیلیتی و آماده‌سازی شرایط راه‌اندازی',
+                    demands: '۱. تأمین به‌موقع شرایط مرجع و خوراک/یوتیلیتی مورد نیاز راه‌اندازی و آزمون‌ها؛\n۲. صدور تمدید مدت متناسب (EOT) و لحاظ کردن آثار زمانی در برنامه تحویل موقت (PAC).'
+                },
+                oral_instruction: {
+                    subject: 'استعلام و تأییدیه کتبی دستور شفاهی صادره در پروژه',
+                    demands: '۱. ثبت کتبی دستور شفاهی و درخواست تأیید یا اعلام نظر کتبی ظرف مهلت مقرر؛\n۲. تعیین تکلیف اثر فنی، زمانی و مالی دستور در چارچوب قرارداد.'
+                },
+                daab_referral: {
+                    subject: 'درخواست رسمی ارجاع موضوع اختلاف به هیئت حل اختلاف (DAB / DAAB)',
+                    demands: '۱. ارجاع موضوع اختلاف پس از سپری شدن مرحله مذاکره به هیئت حل اختلاف سه‌نفره؛\n۲. درخواست صدور تصمیم مستدل و لازم‌الاجرا در مهلت مقرر قراردادی.'
+                }
+            };
+
+            const info = specs[type] || specs.notice_20_2;
+            const output = `بسمه تعالی
+تاریخ: ${date}
+شماره نامه: ${Math.floor(1000 + Math.random() * 9000)}/EPCC-F/LEGAL
+پروژه: ${project}
+
+مخاطب محترم: ${recipient}
+از طرف: ${sender}
+
+موضوع: ${info.subject}
+
+با سلام و احترام؛
+عطف به قرارداد منعقده و پیوست‌های مربوطه در چارچوب EPCC+F و شرایط عمومی فیدیک ۲۰۱۷، بدین‌وسیله مراتب زیر به صورت کتبی اعلام می‌گردد:
+
+۱. شرح موضوع:
+${facts}
+
+۲. درخواست‌ها و اقدامات مورد انتظار:
+${info.demands}
+
+این مکاتبه صرفاً جهت حفظ حقوق قراردادی و قانونی طرف ارسال‌کننده تنظیم شده و به منزله اسقاط سایر حقوق یا ادعاهای آتی نیست.
+
+با احترام
+${sender}`;
+
+            document.getElementById('generated-letter-output').value = output;
+            showToast('متن نامه حقوقی آماده شد.', 'success');
+        }
+
+        function copyLetterToClipboard() {
+            const el = document.getElementById('generated-letter-output');
+            if (!el.value.trim()) {
+                showToast('ابتدا متن نامه را تولید کنید.', 'warning');
+                return;
+            }
+            el.select();
+            document.execCommand('copy');
+            showToast('متن نامه در کلیپ‌بورد کپی شد.', 'success');
+        }
+
+        function downloadLetterFile() {
+            const text = document.getElementById('generated-letter-output').value.trim();
+            if (!text) {
+                showToast('ابتدا متن نامه را تولید کنید.', 'warning');
+                return;
+            }
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `EPCCF_Letter_${Date.now()}.txt`;
+            link.click();
+            URL.revokeObjectURL(url);
+            showToast('فایل نامه دانلود شد.', 'success');
+        }
+
+        // ==================== PERSIAN Q&A KNOWLEDGE ENGINE ====================
+        function generateSmartAnswer(query) {
+            const q = (query || '').toLowerCase().trim();
+            const stopWords = new Set(['چگونه', 'چطور', 'چیست', 'کدام', 'است', 'در', 'از', 'به', 'با', 'برای', 'که', 'را', 'و', 'یا', 'تا', 'چه', 'این', 'آن', 'مورد']);
+            const tokens = q
+                .replace(/[^\p{L}\p{N}\s.-]/gu, ' ')
+                .split(/\s+/)
+                .filter(w => w.length >= 2 && !stopWords.has(w));
+
+            const matches = documentsStore
+                .map(doc => {
+                    const hay = (doc.title + ' ' + doc.content).toLowerCase();
+                    let score = 0;
+                    tokens.forEach(t => {
+                        if (hay.includes(t)) score += t.length;
+                    });
+                    return { doc, score };
+                })
+                .filter(x => x.score > 0)
+                .sort((a, b) => b.score - a.score);
+
+            let userDocExcerpt = '';
+            if (matches.length > 0 && matches[0].doc.type === 'سند آپلودی کاربر') {
+                userDocExcerpt = `\n\n📄 مستند مرتبط در اسناد آپلودی شما («${matches[0].doc.title}»):\n«${matches[0].doc.content.slice(0, 260)}...»`;
+            }
+
+            if (q.includes('cbs') || q.includes('واحد') || q.includes('بودجه') || q.includes('نیروگاه') || q.includes('پساب') || q.includes('هوا') || q.includes('آب')) {
+                return `بر اساس ماده ۲ و ماده ۵ قرارداد EPCC+F (مبلغ کل ۵,۰۰۰,۰۰۰,۰۰۰ یورو):\n• کد 1000 – آب و آبگیر (WWT): ۶۵۰,۰۰۰,۰۰۰ یورو (۱۳٪)؛ ورودی آب خام 12,000 m³/h و تولید آب دی‌مینراله DM 4,500 m³/h.\n• کد 2000 – نیروگاه و بخار (CCPP): ۱,۸۵۰,۰۰۰,۰۰۰ یورو (۳۷٪)؛ برق 650 MW، بخار 1,200 t/h و راندمان حرارتی حداقل ۵۲٪.\n• کد 3000 – تفکیک هوا (ASU): ۹۵۰,۰۰۰,۰۰۰ یورو (۱۹٪)؛ اکسیژن 4,800 TPD، نیتروژن 6,200 TPD و آرگون 180 TPD.\n• کد 4000 – پساب و ZLD (ETP): ۶۰۰,۰۰۰,۰۰۰ یورو (۱۲٪)؛ ظرفیت 3,200 m³/h با بازیافت ≥۹۵٪.\n• کد 5000 – آفسایت و شبکه‌های توزیع (OSD): ۹۵۰,۰۰۰,۰۰۰ یورو (۱۹٪)؛ مخازن، خطوط لوله بین‌واحدی و کنترل یکپارچه DCS/SCADA.${userDocExcerpt}`;
+            }
+
+            if (q.includes('فاینانس') || q.includes('۸۵') || q.includes('۱۵') || q.includes('پیش‌پرداخت') || q.includes('پیش پرداخت') || q.includes('ipc') || q.includes('صورت‌وضعیت') || q.includes('صورت وضعيت')) {
+                return `بر اساس ماده ۳ و پیوست چهارم قرارداد EPCC+F:\n• تأمین مالی (+F): ۸۵٪ مبلغ قرارداد معادل ۴,۲۵۰,۰۰۰,۰۰۰ یورو با دوره تنفس ۳ سال و بازپرداخت ۷ سال پس از تحویل موقت (PAC)؛ و ۱۵٪ سهم نقدی کارفرما معادل ۷۵۰,۰۰۰,۰۰۰ یورو.\n• پیش‌پرداخت: ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو) ظرف ۳۰ روز تقویمی پس از امضا، ارائه ضمانت‌نامه بانکی معادل آن و تأیید بسته مالی اولیه.\n• صورت‌وضعیت ماهانه IPC_t: کارکرد ناخالص تجمعی G_t = Σ(C_j × P_{j,t}) + V_t منهای استهلاک پیش‌پرداخت و کسور حسن انجام کار ۵٪.${userDocExcerpt}`;
+            }
+
+            if (q.includes('فورس ماژور') || q.includes('۱۲۰') || q.includes('۱۸۰') || q.includes('تأخیر') || q.includes('تاخیر') || q.includes('۲۸ روز') || q.includes('28') || q.includes('فیدیک') || q.includes('fidic')) {
+                return `بر اساس قرارداد EPCC+F و چارچوب FIDIC Silver Book 2017:\n• در قرارداد EPCC+F: مدت اجرا تا تحویل موقت ۳۶ ماه و دوره تضمین تا تحویل قطعی ۱۲ ماه است. خسارت تأخیر روزانه ۰.۰۵٪ (۲,۵۰۰,۰۰۰ یورو در روز) تا سقف ۱۰٪ (۵۰۰,۰۰۰,۰۰۰ یورو) محاسبه می‌شود. فورس ماژور باید ظرف ۷ روز کتباً اعلام شود و در صورت استمرار بیش از ۱۲۰ یا ۱۸۰ روز حق فسخ ایجاد می‌کند.\n• در فیدیک ۲۰۱۷: ارسال اخطار اولیه ادعا (Notice of Claim) ظرف ۲۸ روز تقویمی از زمان آگاهی و لایحه تفصیلی ظرف ۸۴ روز تقویمی اهمیت حیاتی دارد و رعایت نکردن مهلت ۲۸ روزه می‌تواند حق تمدید یا جبران را ساقط کند.${userDocExcerpt}`;
+            }
+
+            if (q.includes('pld') || q.includes('عملکرد') || q.includes('خسارت') || q.includes('daab') || q.includes('dab') || q.includes('داوری') || q.includes('icc')) {
+                return `بر اساس پیوست دوم و سوم قرارداد و چارچوب حل اختلاف:\n• فرمول خسارت عملکردی (PLD): برای هر شاخص i، PLD_i = max(0, Δ_i × k_i) و جمع کل PLD_total = min(Cap_PLD, Σ PLD_i) با سقف کل ۵۰۰,۰۰۰,۰۰۰ یورو (۱۰٪ مبلغ قرارداد).\n• حل اختلاف: مذاکره ۳۰ روزه، ارجاع به هیئت حل اختلاف (DAB / DAAB) با تصمیم لازم‌الاجرای موقت و در نهایت داوری قطعی و لازم‌الاجرا تحت قواعد اتاق بازرگانی بین‌المللی (ICC).${userDocExcerpt}`;
+            }
+
+            return `پاسخ فارسی بر اساس پایگاه دانش قرارداد EPCC+F، پیوست‌ها، اسناد بارگذاری‌شده و فیدیک ۲۰۱۷:\nدر خصوص پرسش «${query}»، رعایت دقیق تشریفات کتبی، ثبت سوابق هم‌زمان (Contemporaneous Records)، پایش مهلت‌های ۲۸ روزه اخطار و بررسی سقف‌های قراردادی (مانند سقف ۱۰٪ خسارت تأخیر یا PLD و تعهدات تأمین مالی ۸۵/۱۵) ضروری است. در صورت نیاز به پیش‌نویس نامه یا تحلیل بند خاص، از بخش‌های مربوط در منوی کناری استفاده کنید.${userDocExcerpt}`;
+        }
+
+        function appendChatMessage(containerId, text, isUser = false) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const row = document.createElement('div');
+            row.className = `flex items-start gap-2.5 ${isUser ? 'flex-row-reverse' : ''}`;
+
+            const avatar = document.createElement('div');
+            avatar.className = isUser
+                ? 'w-7 h-7 rounded-lg bg-purple-600/30 border border-purple-400/40 flex items-center justify-center text-purple-200 shrink-0 mt-0.5'
+                : 'w-7 h-7 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shrink-0 mt-0.5';
+            avatar.innerHTML = isUser ? '<i class="fa-solid fa-user text-xs"></i>' : '<i class="fa-solid fa-scale-balanced text-xs"></i>';
+
+            const bubble = document.createElement('div');
+            bubble.className = isUser
+                ? 'bg-purple-950/60 border border-purple-500/30 rounded-xl p-3 text-white max-w-xl whitespace-pre-line'
+                : 'bg-blue-950/60 border border-blue-500/25 rounded-xl p-3 text-slate-200 max-w-2xl whitespace-pre-line';
+            bubble.textContent = text;
+
+            if (!isUser) {
+                const speakBtn = document.createElement('button');
+                speakBtn.type = 'button';
+                speakBtn.className = 'mt-2.5 inline-flex items-center gap-1.5 text-[11px] text-cyan-300 hover:text-white bg-cyan-500/15 hover:bg-cyan-500/30 border border-cyan-400/30 px-2.5 py-1 rounded-lg transition-all';
+                speakBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i><span>پخش صدای فارسی</span>';
+                speakBtn.onclick = () => speakPersianText(text);
+                bubble.appendChild(document.createElement('br'));
+                bubble.appendChild(speakBtn);
+            }
+
+            row.appendChild(avatar);
+            row.appendChild(bubble);
+            container.appendChild(row);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // ==================== PERSIAN VOICE ENGINE (STT + TTS) ====================
+        let recognition = null;
+        let isListening = false;
+        let persianVoiceTimer = null;
+        let persianAudioCtx = null;
+        let isPersianEngineSpeaking = false;
+
+        const PersianVoiceEngine = {
+            getAvailablePersianVoices() {
+                if (!('speechSynthesis' in window)) return [];
+                const voices = window.speechSynthesis.getVoices() || [];
+                return voices.filter(v =>
+                    (v.lang && v.lang.toLowerCase().startsWith('fa')) ||
+                    (v.name && /persian|farsi|iran|fa-ir/i.test(v.name))
+                );
+            },
+
+            populateVoiceSelector() {
+                const select = document.getElementById('persian-voice-select');
+                if (!select) return;
+                const prev = select.value || 'auto';
+                const faVoices = this.getAvailablePersianVoices();
+
+                select.innerHTML = '';
+                const autoOpt = document.createElement('option');
+                autoOpt.value = 'auto';
+                autoOpt.className = 'bg-cyber-950 text-cyan-200';
+                autoOpt.textContent = faVoices.length > 0
+                    ? `خودکار (${faVoices[0].name})`
+                    : 'خودکار (موتور صدای فارسی)';
+                select.appendChild(autoOpt);
+
+                faVoices.forEach((v, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = `native:${v.voiceURI || v.name || idx}`;
+                    opt.className = 'bg-cyber-950 text-cyan-200';
+                    opt.textContent = `صدای فارسی: ${v.name}`;
+                    select.appendChild(opt);
+                });
+
+                const synthOpt = document.createElement('option');
+                synthOpt.value = 'persian-synth';
+                synthOpt.className = 'bg-cyber-950 text-purple-200';
+                synthOpt.textContent = 'موتور صدای فارسی داشبورد';
+                select.appendChild(synthOpt);
+
+                if (Array.from(select.options).some(o => o.value === prev)) {
+                    select.value = prev;
+                }
+            },
+
+            getSelectedNativeVoice() {
+                const select = document.getElementById('persian-voice-select');
+                const faVoices = this.getAvailablePersianVoices();
+                if (!select || select.value === 'persian-synth') return null;
+                if (select.value === 'auto') return faVoices[0] || null;
+                if (select.value.startsWith('native:')) {
+                    const id = select.value.replace('native:', '');
+                    return faVoices.find(v => (v.voiceURI || v.name) === id) || faVoices[0] || null;
+                }
+                return faVoices[0] || null;
+            },
+
+            playCadenceTone(isStart = true) {
+                try {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtx) return;
+                    if (!persianAudioCtx) persianAudioCtx = new AudioCtx();
+                    if (persianAudioCtx.state === 'suspended') persianAudioCtx.resume();
+
+                    const now = persianAudioCtx.currentTime;
+                    const osc = persianAudioCtx.createOscillator();
+                    const gain = persianAudioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(isStart ? 523.25 : 440, now);
+                    osc.frequency.exponentialRampToValueAtTime(isStart ? 659.25 : 349.23, now + 0.14);
+
+                    gain.gain.setValueAtTime(0.001, now);
+                    gain.gain.exponentialRampToValueAtTime(0.04, now + 0.03);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
+
+                    osc.connect(gain);
+                    gain.connect(persianAudioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.17);
+                } catch (e) {}
+            },
+
+            stop() {
+                isPersianEngineSpeaking = false;
+                if (persianVoiceTimer) {
+                    clearInterval(persianVoiceTimer);
+                    persianVoiceTimer = null;
+                }
+                if ('speechSynthesis' in window) {
+                    try {
+                        window.speechSynthesis.cancel();
+                    } catch (e) {}
+                }
+                const eq = document.getElementById('voice-equalizer');
+                if (eq) eq.classList.add('opacity-30');
+            },
+
+            speak(text) {
+                this.stop();
+                const clean = (text || '')
+                    .replace(/[*#•📄]/g, '')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                if (!clean) return;
+
+                const eq = document.getElementById('voice-equalizer');
+                const statusEl = document.getElementById('voice-status-text');
+                const rateInput = document.getElementById('persian-rate-range');
+                const rate = rateInput ? parseFloat(rateInput.value) || 1.0 : 1.0;
+                const mode = document.getElementById('persian-voice-select')?.value || 'auto';
+                const nativeVoice = this.getSelectedNativeVoice();
+
+                if ('speechSynthesis' in window && mode !== 'persian-synth' && nativeVoice) {
+                    try {
+                        const utter = new SpeechSynthesisUtterance(clean);
+                        utter.lang = nativeVoice.lang || 'fa-IR';
+                        utter.voice = nativeVoice;
+                        utter.rate = rate;
+                        utter.pitch = 1.0;
+
+                        utter.onstart = () => {
+                            isPersianEngineSpeaking = true;
+                            if (eq) eq.classList.remove('opacity-30');
+                            if (statusEl) statusEl.textContent = `در حال قرائت فارسی (${nativeVoice.name})...`;
+                        };
+                        utter.onend = () => {
+                            isPersianEngineSpeaking = false;
+                            if (eq) eq.classList.add('opacity-30');
+                            if (statusEl) statusEl.textContent = 'قرائت صوتی فارسی به پایان رسید.';
+                        };
+                        utter.onerror = () => {
+                            this.runFallbackEngine(clean, rate);
+                        };
+                        window.speechSynthesis.speak(utter);
+                        return;
+                    } catch (e) {
+                        this.runFallbackEngine(clean, rate);
+                        return;
+                    }
+                }
+
+                this.runFallbackEngine(clean, rate);
+            },
+
+            runFallbackEngine(clean, rate = 1.0) {
+                const eq = document.getElementById('voice-equalizer');
+                const statusEl = document.getElementById('voice-status-text');
+                const parts = clean.split(/[.!؟:\n]+/).map(s => s.trim()).filter(Boolean);
+                if (!parts.length) return;
+
+                isPersianEngineSpeaking = true;
+                this.playCadenceTone(true);
+                if (eq) eq.classList.remove('opacity-30');
+
+                let idx = 0;
+                const intervalMs = Math.max(1500, Math.min(4000, Math.round(2300 / rate)));
+
+                const step = () => {
+                    if (!isPersianEngineSpeaking) return;
+                    if (idx >= parts.length) {
+                        this.stop();
+                        this.playCadenceTone(false);
+                        if (statusEl) statusEl.textContent = 'پخش صوتی فارسی پاسخ کامل شد.';
+                        return;
+                    }
+                    const chunk = parts[idx];
+                    const shortPreview = chunk.length > 55 ? chunk.slice(0, 55) + '...' : chunk;
+                    if (statusEl) {
+                        statusEl.textContent = `موتور صوتی فارسی (${idx + 1}/${parts.length}): «${shortPreview}»`;
+                    }
+                    idx++;
+                };
+
+                step();
+                persianVoiceTimer = setInterval(step, intervalMs);
+            }
+        };
+
+        function setLiveTranscript(text, isFinal = false) {
+            const box = document.getElementById('voice-live-transcript');
+            if (!box) return;
+            box.textContent = text || 'متن تشخیص‌داده‌شده از گفتار فارسی اینجا نمایش داده می‌شود...';
+            box.className = isFinal
+                ? 'bg-emerald-950/50 border border-emerald-400/40 rounded-xl px-3 py-2.5 text-[11px] text-emerald-100 min-h-[42px] text-right leading-relaxed font-medium'
+                : 'bg-cyber-950/90 border border-cyan-500/35 rounded-xl px-3 py-2.5 text-[11px] text-cyan-100 min-h-[42px] text-right leading-relaxed';
+        }
+
+        function processAssistantQuestion(questionText, fromVoice = false) {
+            const trimmed = (questionText || '').trim();
+            if (!trimmed) return;
+
+            appendChatMessage('overview-chat-box', trimmed, true);
+            appendChatMessage('full-chat-messages', trimmed, true);
+
+            const answer = generateSmartAnswer(trimmed);
+            appendChatMessage('overview-chat-box', answer, false);
+            appendChatMessage('full-chat-messages', answer, false);
+
+            const autoRead = document.getElementById('tts-auto-read');
+            if (!autoRead || autoRead.checked) {
+                speakPersianText(answer);
+            } else if (fromVoice) {
+                document.getElementById('voice-status-text').textContent = 'پاسخ فارسی آماده شد.';
+            }
+        }
+
+        function handleOverviewChat(event) {
+            event.preventDefault();
+            const input = document.getElementById('overview-chat-input');
+            if (!input || !input.value.trim()) return;
+            const q = input.value.trim();
+            input.value = '';
+            processAssistantQuestion(q, false);
+        }
+
+        function askQuickQuestion(q) {
+            processAssistantQuestion(q, false);
+        }
+
+        function handleFullChatSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('full-chat-input');
+            if (!input || !input.value.trim()) return;
+            const q = input.value.trim();
+            input.value = '';
+            processAssistantQuestion(q, false);
+        }
+
+        function clearFullChat() {
+            const container = document.getElementById('full-chat-messages');
+            if (container) {
+                container.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center text-white shrink-0">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="bg-blue-950/60 border border-blue-500/25 rounded-2xl p-3.5 text-slate-200 max-w-2xl">
+                            گفتگو پاک شد. سؤال جدید خود را به زبان فارسی بپرسید یا بگویید.
+                        </div>
+                    </div>
+                `;
+            }
+            showToast('تاریخچه گفتگو پاک شد.', 'info');
+        }
+
+        function initPersianRecognition() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRec) return null;
+
+            const rec = new SpeechRec();
+            rec.lang = 'fa-IR';
+            rec.continuous = false;
+            rec.interimResults = true;
+            rec.maxAlternatives = 3;
+
+            let finalHandled = false;
+            let latestText = '';
+
+            rec.onstart = () => {
+                isListening = true;
+                finalHandled = false;
+                latestText = '';
+                stopSpeaking();
+                PersianVoiceEngine.playCadenceTone(true);
+                setLiveTranscript('در حال شنیدن صدای فارسی شما...', false);
+                updateVoiceUI(true, 'در حال شنیدن صدای فارسی شما... صحبت کنید');
+            };
+
+            rec.onresult = (event) => {
+                let interim = '';
+                let finalStr = '';
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const res = event.results[i];
+                    const transcript = (res[0] && res[0].transcript) ? res[0].transcript.trim() : '';
+                    if (!transcript) continue;
+                    if (res.isFinal) {
+                        finalStr += (finalStr ? ' ' : '') + transcript;
+                    } else {
+                        interim += (interim ? ' ' : '') + transcript;
+                    }
+                }
+
+                const display = (finalStr || interim).trim();
+                if (display) {
+                    latestText = display;
+                    setLiveTranscript(display, Boolean(finalStr));
+                    document.getElementById('voice-status-text').textContent = finalStr
+                        ? `عبارت فارسی نهایی: «${finalStr}»`
+                        : `در حال دریافت گفتار فارسی: «${interim}»`;
+                }
+
+                if (finalStr && !finalHandled) {
+                    finalHandled = true;
+                    document.getElementById('voice-status-text').textContent = `در حال تحلیل فارسی: «${finalStr}»`;
+                    processAssistantQuestion(finalStr, true);
+                }
+            };
+
+            rec.onerror = (event) => {
+                isListening = false;
+                let msg = 'خطا در تشخیص صدای فارسی؛ می‌توانید سؤال خود را تایپ کنید.';
+                if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                    msg = 'دسترسی به میکروفون داده نشده است. اجازه میکروفون را در مرورگر فعال کنید.';
+                } else if (event.error === 'no-speech') {
+                    msg = 'صدای فارسی شنیده نشد. دوباره دکمه شروع گفتگو را بزنید.';
+                } else if (event.error === 'audio-capture') {
+                    msg = 'میکروفون فعالی یافت نشد.';
+                }
+                updateVoiceUI(false, msg);
+                showToast(msg, 'warning');
+            };
+
+            rec.onend = () => {
+                isListening = false;
+                if (!finalHandled && latestText) {
+                    finalHandled = true;
+                    processAssistantQuestion(latestText, true);
+                    return;
+                }
+                const cur = document.getElementById('voice-status-text').textContent;
+                if (cur.includes('در حال شنیدن') || cur.includes('در حال دریافت')) {
+                    updateVoiceUI(false, 'آماده شنیدن صدای فارسی شما...');
+                }
+            };
+
+            return rec;
+        }
+
+        recognition = initPersianRecognition();
+
+        async function toggleVoiceListening() {
+            if (!recognition) {
+                recognition = initPersianRecognition();
+            }
+            if (!recognition) {
+                showToast('مرورگر شما از تشخیص گفتار پشتیبانی نمی‌کند؛ از Chrome یا Edge استفاده کنید.', 'warning');
+                return;
+            }
+            if (isListening) {
+                try {
+                    recognition.stop();
+                } catch (e) {}
+                return;
+            }
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    stream.getTracks().forEach(track => track.stop());
+                } catch (err) {
+                    const msg = 'دسترسی به میکروفون رد شد. لطفاً مجوز میکروفون را فعال کنید.';
+                    updateVoiceUI(false, msg);
+                    showToast(msg, 'warning');
+                    return;
+                }
+            }
+
+            try {
+                recognition.lang = 'fa-IR';
+                recognition.start();
+            } catch (e) {
+                recognition = initPersianRecognition();
+                if (recognition) {
+                    try {
+                        recognition.start();
+                    } catch (e2) {
+                        showToast('امکان شروع شنیدن صدا در این لحظه وجود ندارد.', 'warning');
+                    }
+                }
+            }
+        }
+
+        function updateVoiceUI(active, statusMsg) {
+            const ring = document.getElementById('voice-pulse-ring');
+            const eq = document.getElementById('voice-equalizer');
+            const label = document.getElementById('voice-mic-label');
+            const icon = document.getElementById('voice-mic-icon');
+            document.getElementById('voice-status-text').textContent = statusMsg;
+
+            if (active) {
+                ring.classList.remove('hidden');
+                eq.classList.remove('opacity-30');
+                label.textContent = 'توقف ضبط';
+                icon.className = 'fa-solid fa-stop text-3xl text-rose-300';
+            } else {
+                ring.classList.add('hidden');
+                eq.classList.add('opacity-30');
+                label.textContent = 'شروع گفتگو';
+                icon.className = 'fa-solid fa-microphone text-3xl';
+            }
+        }
+
+        function stopSpeaking() {
+            PersianVoiceEngine.stop();
+        }
+
+        function speakPersianText(text) {
+            PersianVoiceEngine.speak(text);
+        }
+
+        function onPersianVoiceChange() {
+            const sel = document.getElementById('persian-voice-select');
+            if (!sel) return;
+            const txt = sel.options[sel.selectedIndex]?.textContent || '';
+            document.getElementById('voice-status-text').textContent = `صدای انتخاب‌شده: ${txt}`;
+            showToast('تنظیمات صدای فارسی به‌روزرسانی شد.', 'info');
+        }
+
+        function testPersianVoiceEngine() {
+            speakPersianText('دستیار صوتی فارسی داشبورد مدیریت قراردادهای ای‌پی‌سی‌سی پلاس اف و فیدیک فعال است و آماده شنیدن و پاسخ‌گویی به زبان فارسی می‌باشد.');
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                PersianVoiceEngine.populateVoiceSelector();
+            };
+        }
+
+        // ==================== MATRIX FILTER ====================
+        function filterMatrixTable() {
+            const q = document.getElementById('matrix-search').value.toLowerCase();
+            document.querySelectorAll('#params-table tbody tr').forEach(row => {
+                row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        window.onload = function() {
+            try {
+                PersianVoiceEngine.populateVoiceSelector();
+                renderDocuments();
+                generateLegalLetter();
+                analyzeContractClause();
+            } catch (err) {
+                showToast('خطای غیرمنتظره در بارگذاری اولیه داشبورد.', 'error');
+            }
+        };
+    </script>
+</body>
+</html>
